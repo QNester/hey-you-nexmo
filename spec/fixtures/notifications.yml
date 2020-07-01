@@ -1,0 +1,23 @@
+events:
+  signed_up:
+    push:
+      title: Hello title
+      body: Hello body!
+    email:
+      subject: Hello subject
+      body: Hello body
+    nexmo:
+      text: Hello!
+
+rspec:
+  test_notification:
+    nexmo:
+      text: 'Hello, %{pass_variable}!'
+  test_notification_with_from:
+    nexmo:
+      text: 'Hello, %{pass_variable}!'
+      from: 'MyNumber'
+  test_notification_unicode:
+    nexmo:
+      text: 'Привет, %{pass_variable}!'
+      is_unicode: true

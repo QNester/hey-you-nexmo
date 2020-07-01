@@ -1,8 +1,8 @@
-# Hey::You::Nexmo
+# Hey, You, Nexmo!
+[![Build Status](https://travis-ci.com/QNester/hey-you-nexmo.svg?branch=master)](https://travis-ci.com/QNester/hey-you-nexmo#)
+[![Gem Version](https://badge.fury.io/rb/hey-you-nexmo.svg)](https://badge.fury.io/rb/hey-you-nexmo)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/hey/you/nexmo`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Send Nexmo sms via [hey-you gem](https://github.com/QNester/hey-you). This gem depended on [nexmo-ruby](https://github.com/Nexmo/nexmo-ruby).
 
 ## Installation
 
@@ -14,7 +14,7 @@ gem 'hey-you-nexmo'
 
 And then execute:
 
-    $ bundle install
+    $ bundle
 
 Or install it yourself as:
 
@@ -22,19 +22,48 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+After load gem you can send Nexmo SMS via [hey-you](https://github.com/QNester/hey-you).
+
+For example:
+```yaml
+# config/notifications.yml
+events:
+  verified_code:
+    # ...
+    nexmo:
+      text: 'Your verification code: %{code}'
+      from: 'bestNumber'
+      is_unicode: false # has priority above this setting in config
+```
+
+```ruby
+# config/initalizers/hey-you.rb
+HeyYou::Config.configure do 
+  # [String] required - your sender number 
+  config.nexmo.from = 'myNumber'
+
+  # [Nexmo::Client] required - Instance of Nexmo client (check https://github.com/Nexmo/nexmo-ruby for more info)
+  config.nexmo.client = Nexmo::Client.new(...)
+  
+  # [Boolean] optional - If you will send unicode texts
+  config.nexmo.is_unicode = true
+  
+  # Check https://developer.nexmo.com/api/sms#delivery-receipt for more info about settings below
+  config.nexmo.ttl = 90000
+  config.nexmo.status_report_req = true
+  config.nexmo.callback = 'http://my_callback.url/'
+end
+```
+
+```ruby
+# // somewhere in your app 
+builder = Builder.new('events.verified_code', code: verified_code) 
+HeyYou::Channels::Nexmo.send!(builder, to: receiver_phone_number) #=> { success: true }
+```
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. 
+You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/hey-you-nexmo. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/hey-you-nexmo/blob/master/CODE_OF_CONDUCT.md).
-
-
-## Code of Conduct
-
-Everyone interacting in the Hey::You::Nexmo project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/hey-you-nexmo/blob/master/CODE_OF_CONDUCT.md).
+To install this gem onto your local machine, run `bundle exec rake install`. 
