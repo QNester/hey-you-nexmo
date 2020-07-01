@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'byebug'
 
 RSpec.describe HeyYou::Channels::Nexmo do
   let!(:api_key) { SecureRandom.uuid }

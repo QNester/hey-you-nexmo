@@ -6,12 +6,12 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Sergey Nesterov"]
   spec.email         = ["qnesterr@gmail.com"]
 
-  spec.summary       = %q{Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{Write a longer description or delete this line.}
+  spec.summary       = %q{Nexmo SMS sender via `hey-you`}
+  spec.description   = %q{This gem extend core gem `hey-you` for send Nexmo SMS.}
   spec.homepage      = "https://github.com/QNester/hey-you-nexmo"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.5.0")
 
-  spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
+  spec.metadata["allowed_push_host"] = "https://rubygems.org/"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/QNester/hey-you-nexmo"
@@ -27,9 +27,8 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "hey-you", '~> 1.2'
   spec.add_runtime_dependency "nexmo", '~> 7.1'
 
-  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "webmock", '~> 3.4'
-  spec.add_development_dependency "ffaker", '~> 2.9'
-  spec.add_development_dependency "byebug"
+  spec.add_development_dependency "ffaker", '~> 2.15'
 end
