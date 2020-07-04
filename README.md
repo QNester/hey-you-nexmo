@@ -49,7 +49,7 @@ HeyYou::Config.configure do
   config.nexmo.is_unicode = true
   
   # [Block] optional - Response handle (block which accept Nexmo::Response object)
-  config.nexmo.response_hander = proc { |response| CheckActualBalanceJob.perform_async(response) }
+  config.nexmo.response_hander = proc { |response| CheckActualBalanceJob.perform_async(response.http_response.body) }
   
   # Check https://developer.nexmo.com/api/sms#delivery-receipt for more info about settings below
   config.nexmo.ttl = 90000
