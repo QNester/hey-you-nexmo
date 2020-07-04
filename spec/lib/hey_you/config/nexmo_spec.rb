@@ -9,6 +9,6 @@ RSpec.describe HeyYou::Config::Nexmo do
   include_examples :singleton
 
   describe 'attributes' do
-    include_examples :have_accessors, :client, :from, :is_unicode, :ttl, :status_report_req, :callback
+    include_examples :have_accessors, :client, :from, :is_unicode, :ttl, :status_report_req, :callback, :response_handler
   end
 end

@@ -10,7 +10,7 @@ module HeyYou
         ttl: 259200000 # 72 hours
       }.freeze
 
-      attr_accessor :client, :from, :is_unicode, :ttl, :status_report_req, :callback
+      attr_accessor :client, :from, :is_unicode, :ttl, :status_report_req, :callback, :response_handler
 
       def initialize
         @is_unicode = DEFAULTS[:is_unicode]
