@@ -105,13 +105,25 @@ RSpec.describe HeyYou::Channels::Nexmo do
       end
 
       context 'callback was not passed' do
-        before {  }
-
         it 'raise CredentialsNotExists' do
           config.nexmo.status_report_req = true
           config.nexmo.callback = nil
 
           expect { subject }.to raise_error(HeyYou::Channels::Nexmo::CredentialsNotExists)
+        end
+      end
+
+      context 'pass response_handler' do
+        let!(:response_handler) { proc { |body| Object.send(:puts, body) } }
+        let!(:response_body) { { status: 'ok' } }
+        before do
+          allow_any_instance_of(Nexmo::SMS).to receive(:send).and_return(response_body)
+          config.nexmo.response_handler = response_handler
+        end
+
+        it 'call handler with response' do
+          expect(Object).to receive(:puts).with(response_body)
+          subject
         end
       end
     end
