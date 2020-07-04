@@ -48,6 +48,9 @@ HeyYou::Config.configure do
   # [Boolean] optional - If you will send unicode texts
   config.nexmo.is_unicode = true
   
+  # [Block] optional - Response handle (block which accept Nexmo::Response object)
+  config.nexmo.response_hander = proc { |response| CheckActualBalanceJob.perform_async(response) }
+  
   # Check https://developer.nexmo.com/api/sms#delivery-receipt for more info about settings below
   config.nexmo.ttl = 90000
   config.nexmo.status_report_req = true

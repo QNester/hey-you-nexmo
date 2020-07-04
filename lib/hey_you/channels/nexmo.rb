@@ -22,7 +22,10 @@ module HeyYou
 
           params = build_params(builder, **options)
 
-          config.nexmo.client.sms.send(params)
+          result = config.nexmo.client.sms.send(params)
+          config.nexmo.response_handler.call(result) if config.nexmo.response_handler
+
+          result
         rescue ::Nexmo::Error => e
           fail ResponseError, e
         end
