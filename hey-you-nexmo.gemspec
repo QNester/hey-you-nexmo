@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "hey-you", '~> 1.2'
+  spec.add_runtime_dependency "hey-you", '>= 1.2'
   spec.add_runtime_dependency "nexmo", '~> 7.1'
 
   spec.add_development_dependency "rake", "~> 13.0"
