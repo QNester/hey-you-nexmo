@@ -1,4 +1,4 @@
-require 'nexmo'
+require 'vonage'
 
 module HeyYou
   module Channels
@@ -26,7 +26,7 @@ module HeyYou
           config.nexmo.response_handler.call(result) if config.nexmo.response_handler
 
           result
-        rescue ::Nexmo::Error => e
+        rescue ::Vonage::Error => e
           fail ResponseError, e
         end
 

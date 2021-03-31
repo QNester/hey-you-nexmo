@@ -5,7 +5,7 @@ RSpec.describe HeyYou::Channels::Nexmo do
   let!(:api_secret) { SecureRandom.uuid }
   let!(:from) { 'RubyTest' }
   let!(:client) do
-    Nexmo::Client.new(api_key: api_key, api_secret: api_secret)
+    Vonage::Client.new(api_key: api_key, api_secret: api_secret)
   end
   let!(:to) { FFaker::PhoneNumber.phone_number }
   let!(:config) { HeyYou::Config.instance }
@@ -30,7 +30,7 @@ RSpec.describe HeyYou::Channels::Nexmo do
       let!(:to) { FFaker::PhoneNumber.phone_number }
 
       it 'send sms via nexmo' do
-        expect_any_instance_of(Nexmo::SMS).to receive(:send).with(
+        expect_any_instance_of(Vonage::SMS).to receive(:send).with(
           text: builder.nexmo.text,
           from: from,
           to: to,
@@ -54,7 +54,7 @@ RSpec.describe HeyYou::Channels::Nexmo do
       let!(:notification_key) { 'rspec.test_notification_with_from' }
 
       it 'send sms via nexmo' do
-        expect_any_instance_of(Nexmo::SMS).to receive(:send).with(
+        expect_any_instance_of(Vonage::SMS).to receive(:send).with(
           text: builder.nexmo.text,
           from: builder.nexmo.from,
           to: to,
@@ -70,7 +70,7 @@ RSpec.describe HeyYou::Channels::Nexmo do
       let!(:notification_key) { 'rspec.test_notification_unicode' }
 
       it 'send sms via nexmo' do
-        expect_any_instance_of(Nexmo::SMS).to receive(:send).with(
+        expect_any_instance_of(Vonage::SMS).to receive(:send).with(
           text: builder.nexmo.text,
           from: from,
           to: to,
@@ -91,7 +91,7 @@ RSpec.describe HeyYou::Channels::Nexmo do
           config.nexmo.status_report_req = true
           config.nexmo.callback = callback_url
 
-          expect_any_instance_of(Nexmo::SMS).to receive(:send).with(
+          expect_any_instance_of(Vonage::SMS).to receive(:send).with(
             text: builder.nexmo.text,
             from: from,
             to: to,
@@ -117,7 +117,7 @@ RSpec.describe HeyYou::Channels::Nexmo do
         let!(:response_handler) { proc { |body| Object.send(:puts, body) } }
         let!(:response_body) { { status: 'ok' } }
         before do
-          allow_any_instance_of(Nexmo::SMS).to receive(:send).and_return(response_body)
+          allow_any_instance_of(Vonage::SMS).to receive(:send).and_return(response_body)
           config.nexmo.response_handler = response_handler
         end
 

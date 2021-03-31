@@ -2,7 +2,9 @@
 [![Build Status](https://travis-ci.com/QNester/hey-you-nexmo.svg?branch=master)](https://travis-ci.com/QNester/hey-you-nexmo#)
 [![Gem Version](https://badge.fury.io/rb/hey-you-nexmo.svg)](https://badge.fury.io/rb/hey-you-nexmo)
 
-Send Nexmo sms via [hey-you gem](https://github.com/QNester/hey-you). This gem depended on [nexmo-ruby](https://github.com/Nexmo/nexmo-ruby).
+Send Nexmo sms via [hey-you gem](https://github.com/QNester/hey-you). 
+This gem depended on [nexmo-ruby](https://github.com/Nexmo/nexmo-ruby) until version 1.0.0.
+After 1.0.0 version gem depended on [vonage-ruby-sdk](https://github.com/Vonage/vonage-ruby-sdk).
 
 ## Installation
 
@@ -42,13 +44,13 @@ HeyYou::Config.configure do
   # [String] required - your sender number 
   config.nexmo.from = 'myNumber'
 
-  # [Nexmo::Client] required - Instance of Nexmo client (check https://github.com/Nexmo/nexmo-ruby for more info)
-  config.nexmo.client = Nexmo::Client.new(...)
+  # [Vonage::Client] required - Instance of Nexmo client (check https://github.com/Nexmo/nexmo-ruby for more info)
+  config.nexmo.client = Vonage::Client.new(...)
   
   # [Boolean] optional - If you will send unicode texts
   config.nexmo.is_unicode = true
   
-  # [Block] optional - Response handle (block which accept Nexmo::Response object)
+  # [Block] optional - Response handle (block which accept Vonage::Response object)
   config.nexmo.response_hander = proc { |response| CheckActualBalanceJob.perform_async(response.http_response.body) }
   
   # Check https://developer.nexmo.com/api/sms#delivery-receipt for more info about settings below
