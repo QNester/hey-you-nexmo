@@ -2,9 +2,11 @@
 [![Build Status](https://travis-ci.com/QNester/hey-you-nexmo.svg?branch=master)](https://travis-ci.com/QNester/hey-you-nexmo#)
 [![Gem Version](https://badge.fury.io/rb/hey-you-nexmo.svg)](https://badge.fury.io/rb/hey-you-nexmo)
 
-Send Nexmo sms via [hey-you gem](https://github.com/QNester/hey-you). 
-This gem depended on [nexmo-ruby](https://github.com/Nexmo/nexmo-ruby) until version 1.0.0.
+Send Nexmo sms via [hey-you gem](https://github.com/QNester/hey-you).
+
 After 1.0.0 version gem depended on [vonage-ruby-sdk](https://github.com/Vonage/vonage-ruby-sdk).
+Early versions of gem depended on [nexmo-ruby](https://github.com/Nexmo/nexmo-ruby).
+
 
 ## Installation
 
@@ -64,6 +66,14 @@ end
 # // somewhere in your app 
 builder = Builder.new('events.verified_code', code: verified_code) 
 HeyYou::Channels::Nexmo.send!(builder, to: receiver_phone_number) #=> { success: true }
+```
+
+If you want send sms with Google hash for [sending verification SMS](https://developers.google.com/identity/sms-retriever/verify?hl=ru)
+just use `google_autofill_code_hash` in your builder:
+
+```ruby
+builder = Builder.new('events.verified_code', code: verified_code, google_autofill_code_hash: 'MySigningHash')
+builder.text => "Your verification code: %{code}\n\nMySigningHash"
 ```
 
 ## Development
